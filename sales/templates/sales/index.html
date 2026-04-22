@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>売上入力</title>
+</head>
+<body>
+    <h1>売上入力</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">保存</button>
+    </form>
+
+    <hr>
+
+    <h2>売上一覧</h2>
+
+    <table border="1">
+        <tr>
+            <th>店舗名</th>
+            <th>日付</th>
+            <th>売上金額</th>
+            <th>原価</th>
+        </tr>
+        {% for sale in sales_list %}
+        <tr>
+            <td>{{ sale.store_name }}</td>
+            <td>{{ sale.date }}</td>
+            <td>{{ sale.sales_amount }}</td>
+            <td>{{ sale.cost }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">データがありません</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
